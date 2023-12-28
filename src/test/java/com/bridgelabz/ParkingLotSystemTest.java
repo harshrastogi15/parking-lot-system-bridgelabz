@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import com.bridgelabz.entity.Car;
+import com.bridgelabz.service.ParkingService;
 import org.junit.Assert;
 import org.junit.Test;
 
