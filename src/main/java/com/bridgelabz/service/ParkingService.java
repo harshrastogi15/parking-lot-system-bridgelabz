@@ -5,6 +5,8 @@ import com.bridgelabz.entity.Car;
 import java.util.ArrayList;
 
 public class ParkingService {
+
+    private final int PARKING_LOT_CAPACITY = 5;
     ArrayList<Car> carArrayList;
 
     public ParkingService(){
@@ -19,5 +21,9 @@ public class ParkingService {
     public boolean unParkCar(Car car) {
         carArrayList.remove(car);
         return true;
+    }
+
+    public boolean checkParkingLotIsFull() {
+        return carArrayList.size() == PARKING_LOT_CAPACITY;
     }
 }
