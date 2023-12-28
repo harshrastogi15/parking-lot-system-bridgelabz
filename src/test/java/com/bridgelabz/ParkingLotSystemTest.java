@@ -16,4 +16,15 @@ public class ParkingLotSystemTest {
         Assert.assertTrue(isAbleToPark);
     }
 
+
+    // UC-2
+    @Test
+    public void unParkCar_ShouldVerify(){
+        Car car = new Car();
+        ParkingService parkingService = new ParkingService();
+        parkingService.parkCar(car);
+        boolean isAbleToUnPark = parkingService.unParkCar(car);
+        Assert.assertTrue(isAbleToUnPark);
+    }
+
 }

@@ -15,4 +15,9 @@ public class ParkingService {
         carArrayList.add(car);
         return true;
     }
+
+    public boolean unParkCar(Car car) {
+        carArrayList.remove(car);
+        return true;
+    }
 }
