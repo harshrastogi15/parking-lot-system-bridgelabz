@@ -3,10 +3,13 @@ package com.bridgelabz.service;
 import com.bridgelabz.entity.Car;
 import com.bridgelabz.entity.SecurityPersonal;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.*;
 
 public class ParkingService {
 
+    private static final int CHARGE_PER_HOUR = 60;
     private final int PARKING_LOT_CAPACITY = 5;
     private SecurityPersonal securityPersonal;
     private boolean isParkingLotFull = false;
@@ -65,5 +68,14 @@ public class ParkingService {
                 .filter(car -> Objects.equals(carNumber, car.getCarNumber()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public int getInvoice(String carNumber) {
+        Car car = this.findCar(carNumber);
+        if(car == null){
+            return -1;
+        }
+        Duration duration = Duration.between(car.getArrivalTime(),LocalTime.now());
+        return (int)(duration.toHours()*CHARGE_PER_HOUR) + (duration.toMinutesPart()%60 >0 ?CHARGE_PER_HOUR:0);
     }
 }

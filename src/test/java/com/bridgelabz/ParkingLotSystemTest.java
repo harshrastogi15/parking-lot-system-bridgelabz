@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalTime;
+
 public class ParkingLotSystemTest {
 
     ParkingService parkingService;
@@ -112,4 +114,16 @@ public class ParkingLotSystemTest {
         Car getCar = parkingService.findCar("UP152w12");
         Assert.assertEquals(3,getCar.getParkingSlot());
     }
+
+
+    // UC-8
+    @Test
+    public void givenCarNumber_ShouldReturnBillToPay(){
+        Car car1 = new Car("BH123edc", LocalTime.now().minusHours(2).minusMinutes(30));
+        parkingService.parkCarReturnSlot(car1);
+        int invoice = parkingService.getInvoice("BH123edc");
+        Assert.assertEquals(180,invoice);
+
+    }
+
 }
