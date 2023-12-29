@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import com.bridgelabz.entity.Car;
 import com.bridgelabz.entity.SecurityPersonal;
+import com.bridgelabz.service.ParkingLotsService;
 import com.bridgelabz.service.ParkingService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -124,6 +125,27 @@ public class ParkingLotSystemTest {
         int invoice = parkingService.getInvoice("BH123edc");
         Assert.assertEquals(180,invoice);
 
+    }
+
+    // UC-9
+    @Test
+    public void givenCar_ParkingAttendant_ShouldParkCarEvenly(){
+        ParkingLotsService parkingLotsService = new ParkingLotsService(securityPersonal);
+        Car car1 = new Car("UP152wde");
+        Car car2 = new Car("UP152wd2");
+        Car car3 = new Car("UP152w12");
+        Car car4 = new Car("UP151234");
+        Car car5 = new Car("BH123edc");
+        int lotNumber1 = parkingLotsService.parkCarEvenlyInLot(car1);
+        Assert.assertEquals(1,lotNumber1);
+        int lotNumber2 = parkingLotsService.parkCarEvenlyInLot(car2);
+        Assert.assertEquals(2,lotNumber2);
+        int lotNumber3 = parkingLotsService.parkCarEvenlyInLot(car3);
+        Assert.assertEquals(3,lotNumber3);
+        int lotNumber4 = parkingLotsService.parkCarEvenlyInLot(car4);
+        Assert.assertEquals(1,lotNumber4);
+        int lotNumber5 = parkingLotsService.parkCarEvenlyInLot(car5);
+        Assert.assertEquals(2,lotNumber5);
     }
 
 }

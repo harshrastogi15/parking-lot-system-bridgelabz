@@ -78,4 +78,8 @@ public class ParkingService {
         Duration duration = Duration.between(car.getArrivalTime(),LocalTime.now());
         return (int)(duration.toHours()*CHARGE_PER_HOUR) + (duration.toMinutesPart()%60 >0 ?CHARGE_PER_HOUR:0);
     }
+
+    public int totalNumberOfCarParked() {
+        return carArrayList.size();
+    }
 }
