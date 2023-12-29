@@ -169,4 +169,26 @@ public class ParkingLotSystemTest {
         int lotNumber5 = parkingLotsService.parkCarNearestForHandicapInLot(car5);
         Assert.assertEquals(2,lotNumber5);
     }
+
+    // UC-11
+    @Test
+    public void givenLargeCar_ParkingAttendant_ShouldParkCarInLotWithHighestSpace(){
+        ParkingLotsService parkingLotsService = new ParkingLotsService(securityPersonal);
+        Car car1 = new Car("UP152wde");
+        Car car2 = new Car("UP152wd2");
+        Car car3 = new Car("UP152w12");
+        Car car4 = new Car("UP151234");
+        Car car5 = new Car("BH123edc");
+        int lotNumber1 = parkingLotsService.parkingLargeCar(car1);
+        Assert.assertEquals(1,lotNumber1);
+        int lotNumber2 = parkingLotsService.parkingLargeCar(car2);
+        Assert.assertEquals(2,lotNumber2);
+        int lotNumber3 = parkingLotsService.parkingLargeCar(car3);
+        Assert.assertEquals(3,lotNumber3);
+        int lotNumber4 = parkingLotsService.parkingLargeCar(car4);
+        Assert.assertEquals(1,lotNumber4);
+        int lotNumber5 = parkingLotsService.parkingLargeCar(car5);
+        Assert.assertEquals(2,lotNumber5);
+    }
+
 }

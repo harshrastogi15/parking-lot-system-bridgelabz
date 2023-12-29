@@ -36,4 +36,15 @@ public class ParkingLotsService {
         parkingServices[parkingLot-1].parkCarReturnSlot(car);
         return parkingLot;
     }
+
+    public int parkingLargeCar(Car car) {
+        int parkingLot = 1;
+        for(int i=0;i<TOTAL_PARKING_LOTS;i++){
+            if(parkingServices[i].totalFreeSpace()>parkingServices[parkingLot-1].totalFreeSpace()){
+                parkingLot = i+1;
+            }
+        }
+        parkingServices[parkingLot-1].parkCarReturnSlot(car);
+        return parkingLot;
+    }
 }

@@ -90,4 +90,8 @@ public class ParkingService {
         }
         return peek;
     }
+
+    public int totalFreeSpace() {
+        return PARKING_LOT_CAPACITY - carArrayList.size();
+    }
 }
