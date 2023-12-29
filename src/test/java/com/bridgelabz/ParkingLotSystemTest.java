@@ -95,4 +95,21 @@ public class ParkingLotSystemTest {
 
     }
 
+    // UC-7
+    @Test
+    public void givenCarNumber_findCarSlot_ShouldReturnParkingSlotNumber(){
+        Car car1 = new Car("UP152wde");
+        Car car2 = new Car("UP152wd2");
+        Car car3 = new Car("UP152w12");
+        Car car4 = new Car("UP151234");
+        Car car5 = new Car("BH123edc");
+        parkingService.parkCarReturnSlot(car1);
+        parkingService.parkCarReturnSlot(car2);
+        parkingService.parkCarReturnSlot(car3);
+        parkingService.parkCarReturnSlot(car4);
+        parkingService.parkCarReturnSlot(car5);
+
+        Car getCar = parkingService.findCar("UP152w12");
+        Assert.assertEquals(3,getCar.getParkingSlot());
+    }
 }

@@ -3,9 +3,7 @@ package com.bridgelabz.service;
 import com.bridgelabz.entity.Car;
 import com.bridgelabz.entity.SecurityPersonal;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class ParkingService {
 
@@ -60,5 +58,12 @@ public class ParkingService {
             securityPersonal.updateMessage(isParkingLotFull);
         }
         return val;
+    }
+
+    public Car findCar(String carNumber) {
+        return carArrayList.stream()
+                .filter(car -> Objects.equals(carNumber, car.getCarNumber()))
+                .findFirst()
+                .orElse(null);
     }
 }
