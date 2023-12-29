@@ -14,12 +14,12 @@ public class ParkingService {
     private SecurityPersonal securityPersonal;
     private boolean isParkingLotFull = false;
     ArrayList<Car> carArrayList;
-    Queue<Integer> freeSpace ;
+    PriorityQueue<Integer> freeSpace ;
 
     public ParkingService(SecurityPersonal securityPersonal){
         carArrayList = new ArrayList<>();
         this.securityPersonal = securityPersonal;
-        freeSpace = new LinkedList<>();
+        freeSpace = new PriorityQueue<>();
         for(int i=0;i<PARKING_LOT_CAPACITY;i++){
             freeSpace.add(i+1);
         }
@@ -81,5 +81,13 @@ public class ParkingService {
 
     public int totalNumberOfCarParked() {
         return carArrayList.size();
+    }
+
+    public int nearestSlotForParking() {
+        Integer peek = freeSpace.peek();
+        if(peek == null){
+            return 10000009;
+        }
+        return peek;
     }
 }
