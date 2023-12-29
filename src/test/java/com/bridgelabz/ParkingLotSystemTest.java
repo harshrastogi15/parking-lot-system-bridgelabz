@@ -74,4 +74,25 @@ public class ParkingLotSystemTest {
         Assert.assertEquals("Parking Lot is full",message);
     }
 
+    // UC-6
+    @Test
+    public void givenCar_AttendantParkCar_ShouldReturnParkingLotNumber(){
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        Car car4 = new Car();
+        Car car5 = new Car();
+        int parkingLotNumber1 = parkingService.parkCarReturnSlot(car1);
+        Assert.assertEquals(1,parkingLotNumber1);
+        int parkingLotNumber2 = parkingService.parkCarReturnSlot(car2);
+        Assert.assertEquals(2,parkingLotNumber2);
+        int parkingLotNumber3 = parkingService.parkCarReturnSlot(car3);
+        Assert.assertEquals(3,parkingLotNumber3);
+        int parkingLotNumber4 = parkingService.parkCarReturnSlot(car4);
+        Assert.assertEquals(4,parkingLotNumber4);
+        int parkingLotNumber5 = parkingService.parkCarReturnSlot(car5);
+        Assert.assertEquals(5,parkingLotNumber5);
+
+    }
+
 }
