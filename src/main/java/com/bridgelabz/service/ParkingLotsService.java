@@ -70,4 +70,14 @@ public class ParkingLotsService {
         }
         return carList;
     }
+
+    public ArrayList<Car> searchCarByCompanyName(String company) {
+        ArrayList<Car> carList = new ArrayList<>();
+        for(int i=0;i<TOTAL_PARKING_LOTS;i++){
+            ArrayList<Car> tempCarList = parkingServices[i].searchCarByCompany(company);
+            if(tempCarList != null)
+                carList.addAll(tempCarList);
+        }
+        return carList;
+    }
 }

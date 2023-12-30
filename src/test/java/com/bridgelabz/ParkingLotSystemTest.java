@@ -242,4 +242,28 @@ public class ParkingLotSystemTest {
 
     }
 
+
+    // UC-14
+    @Test
+    public void onRequestPolice_shouldReturnLocationBMWCars(){
+        Car car1 = new Car("UP152wde","BMW","White","Harsh");
+        Car car2 = new Car("UP152wd2","TOYOTA","White","Alice");
+        Car car3 = new Car("UP152w12","BMW","Blue","Harsh");
+        Car car4 = new Car("UP151234","TOYOTA","Blue","Alice");
+        Car car5 = new Car("BH123edc","TATA","Grey","Bob");
+        parkingLotsService.parkCarEvenlyInLot(car1);
+        parkingLotsService.parkCarEvenlyInLot(car2);
+        parkingLotsService.parkCarEvenlyInLot(car3);
+        parkingLotsService.parkCarEvenlyInLot(car4);
+        parkingLotsService.parkCarEvenlyInLot(car5);
+
+        ArrayList<Car> carList= parkingLotsService.searchCarByCompanyName("BMW");
+        ArrayList<Car> expectedCars = new ArrayList<>();
+        expectedCars.add(car1);
+        expectedCars.add(car3);
+        carList.sort(Comparator.comparing(Car::getCarNumber));
+        expectedCars.sort(Comparator.comparing(Car::getCarNumber));
+        Assert.assertEquals(expectedCars,carList);
+
+    }
 }

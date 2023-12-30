@@ -118,4 +118,17 @@ public class ParkingService {
 
         return filteredCars;
     }
+
+    public ArrayList<Car> searchCarByCompany(String company) {
+        ArrayList<Car> filteredCars = new ArrayList<>();
+
+        for (Car car : carArrayList) {
+            if (company.equals(car.companyName)) {
+                filteredCars.add(car);
+            }
+        }
+
+        return filteredCars;
+
+    }
 }
