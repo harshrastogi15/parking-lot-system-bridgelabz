@@ -11,6 +11,7 @@ public class Car {
     private LocalTime arrivalTime;
     public String color;
     public String companyName;
+    public String parkingAttendantName;
 
 
     public Car(){}
@@ -23,11 +24,18 @@ public class Car {
         this.carNumber = carNumber;
         this.arrivalTime = time;
     }
+
     public Car(String carNumber,String companyName,String color){
         this.carNumber = carNumber;
         this.companyName = companyName;
         this.color = color;
     }
+
+    public Car(String carNumber,String companyName,String color, String parkingAttendantName){
+        this(carNumber,companyName,color);
+        this.parkingAttendantName = parkingAttendantName;
+    }
+
     public int getParkingSlot() {
         return parkingSlot;
     }

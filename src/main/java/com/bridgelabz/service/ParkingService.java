@@ -6,7 +6,6 @@ import com.bridgelabz.entity.SecurityPersonal;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ParkingService {
 
@@ -101,6 +100,18 @@ public class ParkingService {
 
         for (Car car : carArrayList) {
             if (color.equals(car.color)) {
+                filteredCars.add(car);
+            }
+        }
+
+        return filteredCars;
+    }
+
+    public ArrayList<Car> searchCarByColorAndCompany(String color, String company) {
+        ArrayList<Car> filteredCars = new ArrayList<>();
+
+        for (Car car : carArrayList) {
+            if (color.equals(car.color) && company.equals(car.companyName)) {
                 filteredCars.add(car);
             }
         }

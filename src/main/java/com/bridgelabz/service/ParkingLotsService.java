@@ -60,4 +60,14 @@ public class ParkingLotsService {
         parkingServices[parkingLot-1].parkCarReturnSlot(car);
         return parkingLot;
     }
+
+    public ArrayList<Car> searchCarByColorAndCompanyName(String color, String company) {
+        ArrayList<Car> carList = new ArrayList<>();
+        for(int i=0;i<TOTAL_PARKING_LOTS;i++){
+            ArrayList<Car> tempCarList = parkingServices[i].searchCarByColorAndCompany(color,company);
+            if(tempCarList != null)
+                carList.addAll(tempCarList);
+        }
+        return carList;
+    }
 }
