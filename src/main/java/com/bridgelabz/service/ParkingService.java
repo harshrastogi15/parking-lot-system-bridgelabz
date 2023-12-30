@@ -131,4 +131,19 @@ public class ParkingService {
         return filteredCars;
 
     }
+
+    public ArrayList<Car> searchCarParkedInLastMinutes(int minutes) {
+
+        ArrayList<Car> filteredCars = new ArrayList<>();
+
+        for (Car car : carArrayList) {
+            Duration duration = Duration.between(car.getArrivalTime(),LocalTime.now());
+            if (duration.toMinutesPart() < 30) {
+                filteredCars.add(car);
+            }
+        }
+
+        return filteredCars;
+
+    }
 }

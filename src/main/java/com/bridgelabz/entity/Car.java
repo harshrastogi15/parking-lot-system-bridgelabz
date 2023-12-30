@@ -26,7 +26,7 @@ public class Car {
     }
 
     public Car(String carNumber,String companyName,String color){
-        this.carNumber = carNumber;
+        this(carNumber);
         this.companyName = companyName;
         this.color = color;
     }

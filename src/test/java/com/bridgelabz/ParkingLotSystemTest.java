@@ -264,6 +264,37 @@ public class ParkingLotSystemTest {
         carList.sort(Comparator.comparing(Car::getCarNumber));
         expectedCars.sort(Comparator.comparing(Car::getCarNumber));
         Assert.assertEquals(expectedCars,carList);
-
     }
+
+    // UC-15
+    @Test
+    public void onRequestPolice_shouldReturnLocationCarThatParked30MinutesBefore(){
+        Car car1 = new Car("UP152wde","BMW","White","Harsh");
+        Car car2 = new Car("UP152wd2","TOYOTA","White","Alice");
+        Car car7 = new Car("BH123edc", LocalTime.now().minusHours(2).minusMinutes(30));
+        Car car3 = new Car("UP152w12","BMW","Blue","Harsh");
+        Car car4 = new Car("UP151234","TOYOTA","Blue","Alice");
+        Car car5 = new Car("BH123edc","TATA","Grey","Bob");
+        Car car6 = new Car("BH123edc", LocalTime.now().minusHours(2).minusMinutes(30));
+
+        parkingLotsService.parkCarEvenlyInLot(car1);
+        parkingLotsService.parkCarEvenlyInLot(car2);
+        parkingLotsService.parkCarEvenlyInLot(car3);
+        parkingLotsService.parkCarEvenlyInLot(car4);
+        parkingLotsService.parkCarEvenlyInLot(car5);
+        parkingLotsService.parkCarEvenlyInLot(car6);
+        parkingLotsService.parkCarEvenlyInLot(car7);
+
+        ArrayList<Car> carList= parkingLotsService.searchCarParkedInLastMinutes(30);
+        ArrayList<Car> expectedCars = new ArrayList<>();
+        expectedCars.add(car1);
+        expectedCars.add(car2);
+        expectedCars.add(car3);
+        expectedCars.add(car4);
+        expectedCars.add(car5);
+        carList.sort(Comparator.comparing(Car::getCarNumber));
+        expectedCars.sort(Comparator.comparing(Car::getCarNumber));
+        Assert.assertEquals(expectedCars,carList);
+    }
+
 }
