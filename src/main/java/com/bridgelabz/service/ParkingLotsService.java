@@ -3,6 +3,8 @@ package com.bridgelabz.service;
 import com.bridgelabz.entity.Car;
 import com.bridgelabz.entity.SecurityPersonal;
 
+import java.util.ArrayList;
+
 public class ParkingLotsService {
 
     private final int TOTAL_PARKING_LOTS = 3;
@@ -15,6 +17,16 @@ public class ParkingLotsService {
             }
     }
 
+    public ArrayList<Car> searchCarByColor(String color) {
+        ArrayList<Car> carList = new ArrayList<>();
+        for(int i=0;i<TOTAL_PARKING_LOTS;i++){
+            ArrayList<Car> tempCarList = parkingServices[i].searchCarByColor(color);
+            if(tempCarList != null)
+                carList.addAll(tempCarList);
+        }
+        return carList;
+    }
+
     public int parkCarEvenlyInLot(Car car) {
         int parkingLot = 1;
         for(int i=0;i<TOTAL_PARKING_LOTS;i++){
@@ -22,6 +34,7 @@ public class ParkingLotsService {
                 parkingLot = i+1;
             }
         }
+        car.setParkingLotNo(parkingLot);
         parkingServices[parkingLot-1].parkCarReturnSlot(car);
         return parkingLot;
     }

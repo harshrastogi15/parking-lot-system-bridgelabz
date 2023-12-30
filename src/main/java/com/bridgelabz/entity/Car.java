@@ -2,12 +2,16 @@ package com.bridgelabz.entity;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Objects;
 
 public class Car {
     private int parkingSlot;
     private String carNumber;
-
+    private int parkingLotNo;
     private LocalTime arrivalTime;
+    public String color;
+    public String companyName;
+
 
     public Car(){}
     public Car(String carNumber){
@@ -19,7 +23,11 @@ public class Car {
         this.carNumber = carNumber;
         this.arrivalTime = time;
     }
-
+    public Car(String carNumber,String companyName,String color){
+        this.carNumber = carNumber;
+        this.companyName = companyName;
+        this.color = color;
+    }
     public int getParkingSlot() {
         return parkingSlot;
     }
@@ -38,6 +46,22 @@ public class Car {
 
     public LocalTime getArrivalTime() {
         return arrivalTime;
+    }
+
+    public int getParkingLotNo() {
+        return parkingLotNo;
+    }
+
+    public void setParkingLotNo(int parkingLotNo) {
+        this.parkingLotNo = parkingLotNo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return parkingSlot == car.parkingSlot && parkingLotNo == car.parkingLotNo && Objects.equals(carNumber, car.carNumber) && Objects.equals(color, car.color) && Objects.equals(companyName, car.companyName);
     }
 
 }

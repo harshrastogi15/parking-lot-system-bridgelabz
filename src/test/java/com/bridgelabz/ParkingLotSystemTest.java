@@ -9,15 +9,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ParkingLotSystemTest {
 
     ParkingService parkingService;
     SecurityPersonal securityPersonal;
+    ParkingLotsService parkingLotsService;
     @Before
     public void setup(){
         securityPersonal = new SecurityPersonal();
         parkingService = new ParkingService(securityPersonal);
+        parkingLotsService = new ParkingLotsService(securityPersonal);
     }
 
     // UC-1
@@ -130,7 +136,6 @@ public class ParkingLotSystemTest {
     // UC-9
     @Test
     public void givenCar_ParkingAttendant_ShouldParkCarEvenly(){
-        ParkingLotsService parkingLotsService = new ParkingLotsService(securityPersonal);
         Car car1 = new Car("UP152wde");
         Car car2 = new Car("UP152wd2");
         Car car3 = new Car("UP152w12");
@@ -152,7 +157,6 @@ public class ParkingLotSystemTest {
     // UC-10
     @Test
     public void givenHandicapCar_ParkingAttendant_ShouldParkCarNearestPlace(){
-        ParkingLotsService parkingLotsService = new ParkingLotsService(securityPersonal);
         Car car1 = new Car("UP152wde");
         Car car2 = new Car("UP152wd2");
         Car car3 = new Car("UP152w12");
@@ -173,7 +177,6 @@ public class ParkingLotSystemTest {
     // UC-11
     @Test
     public void givenLargeCar_ParkingAttendant_ShouldParkCarInLotWithHighestSpace(){
-        ParkingLotsService parkingLotsService = new ParkingLotsService(securityPersonal);
         Car car1 = new Car("UP152wde");
         Car car2 = new Car("UP152wd2");
         Car car3 = new Car("UP152w12");
@@ -189,6 +192,30 @@ public class ParkingLotSystemTest {
         Assert.assertEquals(1,lotNumber4);
         int lotNumber5 = parkingLotsService.parkingLargeCar(car5);
         Assert.assertEquals(2,lotNumber5);
+    }
+
+
+    // UC-12
+    @Test
+    public void onRequestPolice_shouldReturnLocationOfWhiteCars(){
+        Car car1 = new Car("UP152wde","BMW","White");
+        Car car2 = new Car("UP152wd2","TOYOTA","White");
+        Car car3 = new Car("UP152w12","BMW","Blue");
+        Car car4 = new Car("UP151234","TOYOTA","Blue");
+        Car car5 = new Car("BH123edc","TATA","Grey");
+        parkingLotsService.parkCarEvenlyInLot(car1);
+        parkingLotsService.parkCarEvenlyInLot(car2);
+        parkingLotsService.parkCarEvenlyInLot(car3);
+        parkingLotsService.parkCarEvenlyInLot(car4);
+        parkingLotsService.parkCarEvenlyInLot(car5);
+
+        ArrayList<Car> carList= parkingLotsService.searchCarByColor("White");
+        ArrayList<Car> expectedCars = new ArrayList<>();
+        expectedCars.add(car1);
+        expectedCars.add(car2);
+        carList.sort(Comparator.comparing(Car::getCarNumber));
+        expectedCars.sort(Comparator.comparing(Car::getCarNumber));
+        Assert.assertEquals(expectedCars,carList);
     }
 
 }

@@ -6,6 +6,7 @@ import com.bridgelabz.entity.SecurityPersonal;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ParkingService {
 
@@ -93,5 +94,17 @@ public class ParkingService {
 
     public int totalFreeSpace() {
         return PARKING_LOT_CAPACITY - carArrayList.size();
+    }
+
+    public ArrayList<Car> searchCarByColor(String color) {
+        ArrayList<Car> filteredCars = new ArrayList<>();
+
+        for (Car car : carArrayList) {
+            if (color.equals(car.color)) {
+                filteredCars.add(car);
+            }
+        }
+
+        return filteredCars;
     }
 }
