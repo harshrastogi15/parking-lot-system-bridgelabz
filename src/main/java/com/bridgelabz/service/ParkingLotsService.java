@@ -90,4 +90,14 @@ public class ParkingLotsService {
         }
         return carList;
     }
+
+    public ArrayList<Car> returnAllParkedCars() {
+        ArrayList<Car> carList = new ArrayList<>();
+        for(int i=0;i<TOTAL_PARKING_LOTS;i++){
+            ArrayList<Car> tempCarList = parkingServices[i].returnAllParkedCarsInLot();
+            if(tempCarList != null)
+                carList.addAll(tempCarList);
+        }
+        return carList;
+    }
 }

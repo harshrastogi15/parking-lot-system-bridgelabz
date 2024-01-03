@@ -146,4 +146,8 @@ public class ParkingService {
         return filteredCars;
 
     }
+
+    public ArrayList<Car> returnAllParkedCarsInLot() {
+        return carArrayList;
+    }
 }
